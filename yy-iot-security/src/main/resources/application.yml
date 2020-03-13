@@ -1,0 +1,22 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: iot-security-server
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/zz_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+shiro:
+  loginUrl: /autherror?code=1
+  unauthorizedUrl: /autherror?code=2
+  successUrl: /auth/page/index
