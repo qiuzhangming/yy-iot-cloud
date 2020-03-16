@@ -1,6 +1,6 @@
 package cn.zzdz.security.dao;
 
-import cn.zzdz.security.entity.SysCompanyEntity;
+import cn.zzdz.common.entity.security.SysCompany;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @date 2020-03-02 17:13:03
  */
 
-public interface SysCompanyDao extends JpaRepository<SysCompanyEntity,String>, JpaSpecificationExecutor<SysCompanyEntity> {
+public interface SysCompanyDao extends JpaRepository<SysCompany,String>, JpaSpecificationExecutor<SysCompany> {
 
 }

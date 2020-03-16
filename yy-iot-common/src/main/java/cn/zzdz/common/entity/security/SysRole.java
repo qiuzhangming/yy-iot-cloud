@@ -1,14 +1,11 @@
-package cn.zzdz.security.entity;
+package cn.zzdz.common.entity.security;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +25,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "sys_role")
-public class SysRoleEntity implements Serializable {
+public class SysRole implements Serializable {
 
 	/**
 	 * 
@@ -70,7 +67,7 @@ public class SysRoleEntity implements Serializable {
 	//@JsonIgnore
 	@JsonBackReference
 	@ManyToMany(mappedBy="roles")  //不维护中间表
-	private Set<SysUserEntity> users = new HashSet<>(0);//角色与用户   多对多
+	private Set<SysUser> users = new HashSet<>(0);//角色与用户   多对多
 
 	/**
 	 * 角色与权限
@@ -80,6 +77,6 @@ public class SysRoleEntity implements Serializable {
 	@JoinTable(name="sys_role_permission",
 			joinColumns={@JoinColumn(name="role_id",referencedColumnName="id")},
 			inverseJoinColumns={@JoinColumn(name="permission_id",referencedColumnName="id")})
-	private Set<SysPermissionEntity> permissions = new HashSet<>();//角色与模块  多对多
+	private Set<SysPermission> permissions = new HashSet<>();//角色与模块  多对多
 
 }

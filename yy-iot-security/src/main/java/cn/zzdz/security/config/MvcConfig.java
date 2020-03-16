@@ -1,4 +1,4 @@
-package com.zzdz.security.config;
+package cn.zzdz.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

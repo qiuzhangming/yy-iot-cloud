@@ -1,22 +1,23 @@
-package cn.zzdz.security.entity;
+package cn.zzdz.common.entity.security;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @ApiModel(description= "公司信息")
-@Entity
-@Table(name = "sys_company")
+
 @Data
 @NoArgsConstructor
-public class SysCompanyEntity implements Serializable {
+@Entity
+@Table(name = "sys_company")
+public class SysCompany implements Serializable {
 
     @Id
     @ApiModelProperty(value = "公司id")

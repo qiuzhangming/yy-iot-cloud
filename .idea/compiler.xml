@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="yy-iot-security" />
+        <module name="yy-iot-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

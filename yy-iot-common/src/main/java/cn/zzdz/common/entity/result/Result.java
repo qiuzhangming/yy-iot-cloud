@@ -1,6 +1,5 @@
-package cn.zzdz.security.commom.entity;
+package cn.zzdz.common.entity.result;
 
-import cn.zzdz.security.commom.entity.ResultCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

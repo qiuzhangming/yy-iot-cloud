@@ -1,13 +1,9 @@
-package cn.zzdz.security.entity;
+package cn.zzdz.common.entity.security;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +24,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "sys_user")
-public class SysUserEntity implements Serializable {
+public class SysUser implements Serializable {
 
 	/**
 	 * 用户id
@@ -87,7 +83,7 @@ public class SysUserEntity implements Serializable {
 			joinColumns={@JoinColumn(name="user_id",referencedColumnName="id")},
 			inverseJoinColumns={@JoinColumn(name="role_id",referencedColumnName="id")}
 	)
-	private Set<SysRoleEntity> roles = new HashSet<>();//用户与角色   多对多
+	private Set<SysRole> roles = new HashSet<>();//用户与角色   多对多
 
 
 	/**

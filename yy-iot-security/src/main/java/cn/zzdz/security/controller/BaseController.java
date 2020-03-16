@@ -1,6 +1,6 @@
 package cn.zzdz.security.controller;
 
-import cn.zzdz.security.commom.entity.ProfileResult;
+import cn.zzdz.common.entity.security.ProfileResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.PrincipalCollection;

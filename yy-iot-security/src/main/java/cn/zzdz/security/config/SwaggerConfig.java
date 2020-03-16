@@ -1,8 +1,7 @@
-package com.zzdz.security.config;
+package cn.zzdz.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -22,9 +21,9 @@ import java.util.List;
 
 /**
  * 访问地址：
- * http://127.0.0.1:8080/swagger-ui.html
- * http://localhost:8080/doc.html
- * http://localhost:8080/api-docs.html
+ * http://127.0.0.1:7001/swagger-ui.html
+ * http://localhost:7001/doc.html
+ * http://localhost:7001/api-docs.html
  *
  * @Profile("dev") 可根据环境动态构建
  */
@@ -59,7 +58,7 @@ public class SwaggerConfig {
                 .enable(true)
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.zzdz.security.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cn.zzdz.security.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .globalOperationParameters(parameters) //添加header

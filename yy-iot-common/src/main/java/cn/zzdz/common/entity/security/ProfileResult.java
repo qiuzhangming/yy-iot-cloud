@@ -1,9 +1,6 @@
-package cn.zzdz.security.commom.entity;
+package cn.zzdz.common.entity.security;
 
 
-import cn.zzdz.security.entity.SysPermissionEntity;
-import cn.zzdz.security.entity.SysRoleEntity;
-import cn.zzdz.security.entity.SysUserEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,14 +22,14 @@ public class ProfileResult implements Serializable {
     private Set<String> perms = new HashSet<>();
 
 
-    public ProfileResult(SysUserEntity userEntity) {
+    public ProfileResult(SysUser userEntity) {
         this.id = userEntity.getId();
         this.name = userEntity.getName();
         this.companyId = userEntity.getCompanyId();
 
-        for (SysRoleEntity sysRoleEntity : userEntity.getRoles()) {
-            roles.add(sysRoleEntity.getCode());
-            for (SysPermissionEntity permission : sysRoleEntity.getPermissions()) {
+        for (SysRole sysRole : userEntity.getRoles()) {
+            roles.add(sysRole.getCode());
+            for (SysPermission permission : sysRole.getPermissions()) {
                 perms.add(permission.getCode());
             }
         }

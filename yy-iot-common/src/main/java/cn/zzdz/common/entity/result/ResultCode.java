@@ -1,4 +1,4 @@
-package cn.zzdz.security.commom.entity;
+package cn.zzdz.common.entity.result;
 
 /**
  * 公共的返回码

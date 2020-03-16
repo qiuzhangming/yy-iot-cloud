@@ -1,8 +1,8 @@
 package cn.zzdz.security.controller;
 
 
-import cn.zzdz.security.commom.entity.Result;
-import cn.zzdz.security.commom.entity.ResultCode;
+import cn.zzdz.common.entity.result.Result;
+import cn.zzdz.common.entity.result.ResultCode;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import io.swagger.annotations.Api;

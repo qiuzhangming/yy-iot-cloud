@@ -1,13 +1,15 @@
-package cn.zzdz.security.entity;
+package cn.zzdz.common.entity.security;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -24,7 +26,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "sys_permission")
-public class SysPermissionEntity implements Serializable {
+public class SysPermission implements Serializable {
 
 	/**
 	 * 主键
@@ -68,6 +70,6 @@ public class SysPermissionEntity implements Serializable {
 	//@JsonIgnore
 	@JsonBackReference
 	@ManyToMany(mappedBy="permissions")  //不维护中间表
-	private Set<SysRoleEntity> roles = new HashSet<>(0);//角色与权限   多对多
+	private Set<SysRole> roles = new HashSet<>(0);//角色与权限   多对多
 
 }

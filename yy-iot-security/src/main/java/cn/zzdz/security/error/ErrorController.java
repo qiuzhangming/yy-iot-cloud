@@ -1,7 +1,8 @@
-package cn.zzdz.security.commom.controller;
+package cn.zzdz.security.error;
 
-import cn.zzdz.security.commom.entity.Result;
-import cn.zzdz.security.commom.entity.ResultCode;
+import cn.zzdz.common.entity.result.Result;
+import cn.zzdz.common.entity.result.ResultCode;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ErrorController {
 
-    @RequestMapping("/autherror")
+    @GetMapping("/autherror")
     public Result autherror(int code) {
         switch (code) {
             case 1:

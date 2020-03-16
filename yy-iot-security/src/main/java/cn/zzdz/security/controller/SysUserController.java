@@ -1,13 +1,13 @@
 package cn.zzdz.security.controller;
 
 
-import cn.zzdz.security.commom.entity.Result;
-import cn.zzdz.security.commom.entity.ResultCode;
-import cn.zzdz.security.commom.utils.IdWorker;
+import cn.zzdz.common.entity.result.Result;
+import cn.zzdz.common.entity.result.ResultCode;
+import cn.zzdz.common.entity.security.SysRole;
+import cn.zzdz.common.entity.security.SysUser;
+import cn.zzdz.common.entity.utils.IdWorker;
 import cn.zzdz.security.dao.SysRoleDao;
 import cn.zzdz.security.dao.SysUserDao;
-import cn.zzdz.security.entity.SysRoleEntity;
-import cn.zzdz.security.entity.SysUserEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
@@ -48,13 +48,13 @@ public class SysUserController extends BaseController {
         String userId = (String) map.get("id");
         //2.获取到角色的id列表
         List<String> roleIds = (List<String>) map.get("roleIds");
-        Set<SysRoleEntity> roles = new HashSet<>();
+        Set<SysRole> roles = new HashSet<>();
         for (String roleId : roleIds) {
-            SysRoleEntity sysRole = sysRoleDao.findById(roleId).get();
+            SysRole sysRole = sysRoleDao.findById(roleId).get();
             roles.add(sysRole);
         }
 
-        SysUserEntity sysUser = sysUserDao.findById(userId).get();
+        SysUser sysUser = sysUserDao.findById(userId).get();
         sysUser.setRoles(roles);
         sysUserDao.save(sysUser);
 
@@ -68,7 +68,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions(value = {"sys:user:list", "or"}, logical = Logical.OR)
     @GetMapping("/user")
     public Result findAll(Pageable pageable) {
-        Page<SysUserEntity> page = sysUserDao.findAllByCompanyId(companyId, pageable);
+        Page<SysUser> page = sysUserDao.findAllByCompanyId(companyId, pageable);
         return new Result(ResultCode.SUCCESS, page);
     }
 
@@ -79,7 +79,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions("sys:user:info")
     @GetMapping("/user/{id}")
     public Result findById(@PathVariable("id") String id) {
-		SysUserEntity sysUser = sysUserDao.findById(id).get();
+		SysUser sysUser = sysUserDao.findById(id).get();
         return new Result(ResultCode.SUCCESS, sysUser);
     }
 
@@ -89,7 +89,7 @@ public class SysUserController extends BaseController {
     @PostMapping("/user")
     @ApiOperation(value="添加用户",notes="需要权限-sys:user:save")
     @RequiresPermissions("sys:user:save")
-    public Result save(@RequestBody SysUserEntity sysUser) {
+    public Result save(@RequestBody SysUser sysUser) {
         sysUser.setId(idWorker.nextId()+"");
         sysUser.setCompanyId(companyId);
         sysUser.setCreateTime(new Date());
@@ -106,8 +106,8 @@ public class SysUserController extends BaseController {
     @PutMapping("/user/{id}")
     @ApiOperation(value="修改用户信息",notes="需要权限-sys:user:update，只能修改用户状态和部门。")
     @RequiresPermissions("sys:user:update")
-    public Result update(@PathVariable("id") String id, @RequestBody SysUserEntity sysUser){
-        SysUserEntity entity = sysUserDao.findById(id).get();
+    public Result update(@PathVariable("id") String id, @RequestBody SysUser sysUser){
+        SysUser entity = sysUserDao.findById(id).get();
 
         entity.setStatus(sysUser.getStatus());
         entity.setDepartmentId(sysUser.getDepartmentId());

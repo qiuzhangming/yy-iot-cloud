@@ -1,8 +1,8 @@
 package cn.zzdz.security.shiro;
 
-import cn.zzdz.security.commom.entity.ProfileResult;
+import cn.zzdz.common.entity.security.ProfileResult;
+import cn.zzdz.common.entity.security.SysUser;
 import cn.zzdz.security.dao.SysUserDao;
-import cn.zzdz.security.entity.SysUserEntity;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -61,7 +61,7 @@ public class UserRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = new String(token.getPassword());
         //查询用户信息
-        SysUserEntity user = sysUserDao.findByNameAndPassword(username, password).get();
+        SysUser user = sysUserDao.findByNameAndPassword(username, password).get();
 
         //账号不存在
         if (user == null) {

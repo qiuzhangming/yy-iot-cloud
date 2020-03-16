@@ -1,6 +1,6 @@
 package cn.zzdz.security.dao;
 
-import cn.zzdz.security.entity.SysUserEntity;
+import cn.zzdz.common.entity.security.SysUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,13 +16,13 @@ import java.util.Optional;
  * @date 2020-03-02 17:13:03
  */
 
-public interface SysUserDao extends JpaRepository<SysUserEntity,String>, JpaSpecificationExecutor<SysUserEntity> {
+public interface SysUserDao extends JpaRepository<SysUser,String>, JpaSpecificationExecutor<SysUser> {
 
-    Page<SysUserEntity> findAllByCompanyId(String commanyId, Pageable pageable);
+    Page<SysUser> findAllByCompanyId(String commanyId, Pageable pageable);
 
-    Optional<SysUserEntity> findByName(String name);
+    Optional<SysUser> findByName(String name);
 
-    Optional<SysUserEntity> findByNameAndPassword(String name, String password);
+    Optional<SysUser> findByNameAndPassword(String name, String password);
 
-    Optional<SysUserEntity> findByNameAndPasswordAndCompanyId(String name, String password, String companyId);
+    Optional<SysUser> findByNameAndPasswordAndCompanyId(String name, String password, String companyId);
 }

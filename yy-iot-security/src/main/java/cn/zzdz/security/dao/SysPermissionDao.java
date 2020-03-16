@@ -1,6 +1,6 @@
 package cn.zzdz.security.dao;
 
-import cn.zzdz.security.entity.SysPermissionEntity;
+import cn.zzdz.common.entity.security.SysPermission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @email qiuzhangming@gmail.com
  * @date 2020-03-02 17:13:03
  */
-public interface SysPermissionDao extends JpaRepository<SysPermissionEntity, String>, JpaSpecificationExecutor<SysPermissionEntity> {
+public interface SysPermissionDao extends JpaRepository<SysPermission, String>, JpaSpecificationExecutor<SysPermission> {
 
 }

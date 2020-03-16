@@ -1,4 +1,4 @@
-package com.zzdz.security.config;
+package cn.zzdz.security.config;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
