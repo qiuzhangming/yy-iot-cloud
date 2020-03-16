@@ -12,6 +12,8 @@
     <modules>
         <module>yy-iot-security</module>
         <module>yy-iot-common</module>
+        <module>yy-iot-device</module>
+        <module>yy-iot-generator</module>
     </modules>
 
 
@@ -27,6 +29,8 @@
         <mysql.version>5.1.47</mysql.version>
         <druid.version>1.1.21</druid.version>
         <mybatis.version>2.1.2</mybatis.version>
+        <pagehelper.version>1.2.12</pagehelper.version>
+        <shardingsphere.version>4.0.1</shardingsphere.version>
 
         <shiro.version>1.5.1</shiro.version>
         <kaptcha.version>0.0.9</kaptcha.version>
@@ -68,11 +72,11 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!--      <dependency>-->
-            <!--        <groupId>com.alibaba</groupId>-->
-            <!--        <artifactId>druid</artifactId>-->
-            <!--        <version>${druid.version}</version>-->
-            <!--      </dependency>-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -147,7 +151,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 
 
 </project>

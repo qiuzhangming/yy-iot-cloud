@@ -22,12 +22,16 @@ public enum ResultCode {
     SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！"),
 
     //---用户操作返回码  2xxxx----
-    MOBILEORPASSWORDERROR(false,20001,"用户名或密码错误");
+    MOBILEORPASSWORDERROR(false,20001,"用户名或密码错误"),
 
     //---企业操作返回码  3xxxx----
     //---权限操作返回码----
     //---其他操作返回码----
-
+    //参数不合法
+    PARAMETER_INVALID(false, 10001, "请求数据不合法"),
+    //sql执行错误
+    SQL_EXECUTE_ERROR(false, 10002, "存入数据库时发生错误"),
+    ;
     //操作是否成功
     boolean success;
     //操作代码

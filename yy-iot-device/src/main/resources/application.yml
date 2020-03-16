@@ -1,0 +1,106 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: iot-device-server
+
+  #日志输出
+  shardingsphere:
+    props:
+      sql:
+        show: true
+    #主从库设置
+    datasource:
+      names: master0,master0slave0
+      #主库
+      master0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/zz_iot_device?useSSL=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: root
+        initial-size: 5
+        max-active: 10
+        min-idle: 1
+        # 获取连接等待超时的时间
+        max-wait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位毫秒
+        time-between-eviction-runs-millis: 60000
+        # 配置一个连接在池中最小生存的时间，单位毫秒
+        min-evictable-idle-time-millis: 300000
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        async-init: true
+        # 配置filters，多个英文逗号分隔 slf4j
+        filters: stat,wall
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+        # 合并多个DruidDataSource的监控数据
+        #use-global-data-source-stat: true
+      #从库
+      master0slave0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://localhost:3306/zz_iot_device?useSSL=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: root
+        initial-size: 5
+        max-active: 10
+        min-idle: 1
+        # 获取连接等待超时的时间
+        max-wait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位毫秒
+        time-between-eviction-runs-millis: 60000
+        # 配置一个连接在池中最小生存的时间，单位毫秒
+        min-evictable-idle-time-millis: 300000
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        async-init: true
+        # 配置filters，多个英文逗号分隔 slf4j
+        filters: stat,wall
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+        # 合并多个DruidDataSource的监控数据
+        #use-global-data-source-stat: true
+
+    #主从配置
+    sharding:
+      master-slave-rules:
+        ds0:
+          master-data-source-name: master0
+          slave-data-source-names: master0slave0
+
+
+#mybatis 配置
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  #如果指定了全局配置文件，会和下面的mybatis.configuration.*配置冲突
+  #config-location: classpath:/mybatis/mybatis-config.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#自定义设置
+com:
+  zzdz:
+    #Baidu地图设置
+    baidu:
+      ak: v9IormLDC2RjoHsG0BoQdHiSlGWTX85t
+      output: json
+      coordtype: wgs84ll
+    default:
+      group:
+        name: 默认分组
+        remark: 自动创建的默认分组
+#    regexp:
+#      lng: [\\-+]?(0?\\d{1,2}|0?\\d{1,2}\\.\\d{1,15}|1[0-7]?\\d|1[0-7]?\\d\\.\\d{1,15}|180|180\\.0{1,15})
+#      lat: [\\-+]?([0-8]?\\d|[0-8]?\\d\\.\\d{1,15}|90|90\\.0{1,15})
+

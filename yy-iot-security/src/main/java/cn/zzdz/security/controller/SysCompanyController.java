@@ -6,7 +6,7 @@ import cn.zzdz.common.entity.security.SysCompany;
 import cn.zzdz.common.entity.security.SysPermission;
 import cn.zzdz.common.entity.security.SysRole;
 import cn.zzdz.common.entity.security.SysUser;
-import cn.zzdz.common.entity.utils.IdWorker;
+import cn.zzdz.common.utils.IdWorker;
 import cn.zzdz.security.dao.SysCompanyDao;
 import cn.zzdz.security.dao.SysPermissionDao;
 import cn.zzdz.security.dao.SysRoleDao;

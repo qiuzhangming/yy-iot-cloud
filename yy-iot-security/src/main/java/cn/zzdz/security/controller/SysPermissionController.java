@@ -3,7 +3,7 @@ package com.zzdz.security.controller;
 import cn.zzdz.common.entity.result.Result;
 import cn.zzdz.common.entity.result.ResultCode;
 import cn.zzdz.common.entity.security.SysPermission;
-import cn.zzdz.common.entity.utils.IdWorker;
+import cn.zzdz.common.utils.IdWorker;
 import cn.zzdz.security.controller.BaseController;
 import cn.zzdz.security.dao.SysPermissionDao;
 import io.swagger.annotations.Api;

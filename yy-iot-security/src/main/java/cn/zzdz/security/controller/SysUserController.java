@@ -5,7 +5,7 @@ import cn.zzdz.common.entity.result.Result;
 import cn.zzdz.common.entity.result.ResultCode;
 import cn.zzdz.common.entity.security.SysRole;
 import cn.zzdz.common.entity.security.SysUser;
-import cn.zzdz.common.entity.utils.IdWorker;
+import cn.zzdz.common.utils.IdWorker;
 import cn.zzdz.security.dao.SysRoleDao;
 import cn.zzdz.security.dao.SysUserDao;
 import io.swagger.annotations.Api;

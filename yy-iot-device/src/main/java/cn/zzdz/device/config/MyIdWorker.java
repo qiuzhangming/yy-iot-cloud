@@ -1,4 +1,4 @@
-package cn.zzdz.security.config;
+package cn.zzdz.device.config;
 
 import cn.zzdz.common.utils.IdWorker;
 import org.springframework.context.annotation.Bean;

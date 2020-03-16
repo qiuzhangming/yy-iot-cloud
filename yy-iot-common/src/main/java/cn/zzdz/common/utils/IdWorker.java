@@ -1,4 +1,4 @@
-package cn.zzdz.common.entity.utils;
+package cn.zzdz.common.utils;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
