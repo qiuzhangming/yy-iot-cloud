@@ -2,9 +2,8 @@ package cn.zzdz.device.dao;
 
 import cn.zzdz.common.entity.device.DeviceInfo;
 import cn.zzdz.common.entity.device.DeviceInfoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface DeviceInfoMapper {
     /**

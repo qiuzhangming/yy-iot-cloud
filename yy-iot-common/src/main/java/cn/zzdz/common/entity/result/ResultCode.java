@@ -28,9 +28,10 @@ public enum ResultCode {
     //---权限操作返回码----
     //---其他操作返回码----
     //参数不合法
-    PARAMETER_INVALID(false, 10001, "请求数据不合法"),
+    ID_ERROR(false, 30000, "ID错误"),
+    PARAMETER_INVALID(false, 30001, "参数不合法"),
     //sql执行错误
-    SQL_EXECUTE_ERROR(false, 10002, "存入数据库时发生错误"),
+    SQL_EXECUTE_ERROR(false, 30002, "存入数据库时发生错误"),
     ;
     //操作是否成功
     boolean success;
