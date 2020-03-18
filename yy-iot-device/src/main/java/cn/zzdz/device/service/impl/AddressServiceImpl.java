@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@RefreshScope
 @PropertySource(value = "classpath:application.yml")
 @ConfigurationProperties(prefix = "com.zzdz.baidu")
 @Slf4j
@@ -38,6 +40,7 @@ public class AddressServiceImpl implements AddressService {
      */
     @Override
     public Map<String, String> getAddress(String lat, String lng) {
+        log.info("百度参数设置：{}，{}，{}",ak, output, coordtype);
         String location = lat + "," + lng;
 
         // 请求服务器获取地址信息

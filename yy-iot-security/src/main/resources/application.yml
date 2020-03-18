@@ -1,9 +1,10 @@
-server:
-  port: 7001
-
 spring:
-  application:
-    name: iot-security-server
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

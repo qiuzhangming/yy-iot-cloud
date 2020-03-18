@@ -1,14 +1,14 @@
-server:
-  port: 8001
-
 spring:
-  application:
-    name: iot-device-server
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
 
-  #日志输出
   shardingsphere:
     props:
       sql:
+        #日志输出
         show: false
     #主从库设置
     datasource:
@@ -77,7 +77,6 @@ spring:
           master-data-source-name: master0
           slave-data-source-names: master0slave0
 
-
 #mybatis 配置
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
@@ -87,6 +86,11 @@ mybatis:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 #自定义设置
 com:
@@ -96,8 +100,3 @@ com:
       ak: v9IormLDC2RjoHsG0BoQdHiSlGWTX85t
       output: json
       coordtype: wgs84ll
-    default:
-      group:
-        name: 默认分组
-        remark: 自动创建的默认分组
-
