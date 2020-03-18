@@ -9,7 +9,7 @@ spring:
   shardingsphere:
     props:
       sql:
-        show: true
+        show: false
     #主从库设置
     datasource:
       names: master0,master0slave0
@@ -100,7 +100,4 @@ com:
       group:
         name: 默认分组
         remark: 自动创建的默认分组
-#    regexp:
-#      lng: [\\-+]?(0?\\d{1,2}|0?\\d{1,2}\\.\\d{1,15}|1[0-7]?\\d|1[0-7]?\\d\\.\\d{1,15}|180|180\\.0{1,15})
-#      lat: [\\-+]?([0-8]?\\d|[0-8]?\\d\\.\\d{1,15}|90|90\\.0{1,15})
 

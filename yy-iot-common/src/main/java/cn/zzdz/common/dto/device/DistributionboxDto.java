@@ -23,18 +23,13 @@ import static cn.zzdz.common.constData.ConstData.ID_SIZE;
 public class DistributionboxDto {
     @ApiModelProperty(value = "控制柜的id")
     @Min(value = ID_SIZE, groups = UpdateMethod.class)
-    @NotNull(groups = UpdateMethod.class)
+    //@NotNull(groups = UpdateMethod.class)
     private String id;
 
     @ApiModelProperty(value = "公司id")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class})
     @NotNull(groups = {CreatMethod.class})
     private String companyId;
-
-    @ApiModelProperty(value = "分组id")
-    @Min(value = ID_SIZE, groups = {CreatMethod.class})
-    @NotNull(groups = {CreatMethod.class})
-    private String groupId;
 
     @ApiModelProperty(value = "上级设备id,没有上级设备可不填")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class})
@@ -55,12 +50,17 @@ public class DistributionboxDto {
     )
     private String lng;
 
+
     @ApiModelProperty(value = "纬度")
     @Pattern(regexp = "[\\-+]?([0-8]?\\d|[0-8]?\\d\\.\\d{1,15}|90|90\\.0{1,15})",
             message = "纬度格式错误",
             groups = {CreatMethod.class, UpdateMethod.class}
     )
     private String lat;
+
+    @ApiModelProperty(value = "地址信息")
+    @Length(max = 50, groups = {CreatMethod.class, UpdateMethod.class})
+    private String address;
 
     @ApiModelProperty(value = "备注信息")
     @Length(max = 100, groups = {CreatMethod.class, UpdateMethod.class})

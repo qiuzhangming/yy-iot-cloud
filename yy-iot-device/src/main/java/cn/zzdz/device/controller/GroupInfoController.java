@@ -56,7 +56,7 @@ public class GroupInfoController {
         return new Result(ResultCode.SUCCESS, groupInfo);
     }
 
-    @ApiOperation(value = "根据id删除")
+    @ApiOperation(value = "根据id更新")
     @PutMapping("/{id}")
     public Result updateById(@Size(min = ID_SIZE) @PathVariable("id") String id,@Validated({UpdateMethod.class}) @RequestBody GroupInfoDto groupInfoDto) {
         GroupInfo groupInfo = new GroupInfo();
@@ -65,7 +65,7 @@ public class GroupInfoController {
         return getResult(count);
     }
 
-    @ApiOperation(value = "根据id更新")
+    @ApiOperation(value = "根据id删除")
     @DeleteMapping("/{id}")
     public Result deleyeById(@Size(min = ID_SIZE) @PathVariable("id") String id) {
         int count = groupInfoService.deleyeById(id);
@@ -74,8 +74,7 @@ public class GroupInfoController {
 
     @ApiOperation(value = "根据 companyId，groupModel，groupType查找")
     @PostMapping("/findByCompanyIdAndModelAndType")
-    public Result findByProjectAndModelAndType(@Validated({SearchMethord.class}) @RequestBody GroupInfoDto groupInfoDto,
-                                               @RequestParam("companyId") String companyId,
+    public Result findByProjectAndModelAndType(@RequestParam("companyId") String companyId,
                                                @RequestParam("model") int model,
                                                @RequestParam("type") int type,
                                                @RequestParam("pageNum") int pageNum,

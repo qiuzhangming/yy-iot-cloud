@@ -2,12 +2,15 @@ package cn.zzdz.device.controller;
 
 import cn.zzdz.common.dto.device.*;
 import cn.zzdz.common.entity.device.DeviceInfo;
+import cn.zzdz.common.entity.device.GroupInfo;
 import cn.zzdz.common.entity.result.Result;
 import cn.zzdz.common.entity.result.ResultCode;
 import cn.zzdz.common.validated.CreatMethod;
 import cn.zzdz.common.validated.UpdateMethod;
 import cn.zzdz.device.service.DeviceInfoService;
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +49,6 @@ public class DeviceController {
     @PostMapping("/rtu")
     public Result addRtu(@Validated({CreatMethod.class}) @RequestBody RtuDto rtuDto) {
         log.info("添加rtu：{}", JSON.toJSONString(rtuDto));
-        deviceInfoService.addRtu(rtuDto);
         int count = deviceInfoService.addRtu(rtuDto);
         return getResult(count);
     }
@@ -60,7 +62,7 @@ public class DeviceController {
     }
 
     @ApiOperation(value="添加灯杆")
-    @PostMapping("/")
+    @PostMapping("/lamppost")
     public Result addLamppost(@Validated({CreatMethod.class}) @RequestBody LamppostDto lamppostDto) {
         log.info("添加灯杆：{}", JSON.toJSONString(lamppostDto));
         int count =deviceInfoService.addLamppost(lamppostDto);
@@ -96,18 +98,27 @@ public class DeviceController {
         return new Result(ResultCode.SUCCESS, deviceInfo);
     }
 
-    @ApiOperation(value="根据公司id查询")
-    @GetMapping("/company/{id}")
-    public Result findByCompanyId(@Size(min = ID_SIZE) @PathVariable("id") String id) {
-        List<DeviceInfo> deviceInfo = deviceInfoService.findByCompanyId(id);
-        return new Result(ResultCode.SUCCESS, deviceInfo);
+    @ApiOperation(value="根据公司id和设备类型查询")
+    @GetMapping("/findByCompanyIdAndDeviceType")
+    public Result findByCompanyId(@Size(min = ID_SIZE) @RequestParam("companyId") String companyId,
+                                  @PositiveOrZero @RequestParam("deviceType") int deviceType,
+                                  @RequestParam("pageNum") int pageNum,
+                                  @RequestParam("pageSize") int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<DeviceInfo> deviceInfos = deviceInfoService.findByCompanyIdAndDeviceType(companyId, deviceType);
+        PageInfo<DeviceInfo> pageInfo = new PageInfo<>(deviceInfos);
+        return new Result(ResultCode.SUCCESS, pageInfo);
     }
 
-    @ApiOperation(value="根据pid查询")
-    @GetMapping("/pid/{id}")
-    public Result findByPid(@Size(min = ID_SIZE) @PathVariable("id") String id) {
-        List<DeviceInfo> deviceInfo = deviceInfoService.findByPid(id);
-        return new Result(ResultCode.SUCCESS, deviceInfo);
+    @ApiOperation(value="根据pid查询下级设备")
+    @GetMapping("/findByPid")
+    public Result findByPid(@Size(min = ID_SIZE) @RequestParam("pid") String pid,
+                            @RequestParam("pageNum") int pageNum,
+                            @RequestParam("pageSize") int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<DeviceInfo> deviceInfos = deviceInfoService.findByPid(pid);
+        PageInfo<DeviceInfo> pageInfo = new PageInfo<>(deviceInfos);
+        return new Result(ResultCode.SUCCESS, pageInfo);
     }
 
     /**

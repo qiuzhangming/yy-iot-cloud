@@ -1,11 +1,14 @@
 package cn.zzdz.device.service.impl;
 
+import cn.zzdz.common.entity.device.DeviceInfo;
 import cn.zzdz.common.entity.device.GroupDeviceRelExample;
 import cn.zzdz.common.entity.device.GroupDeviceRelKey;
 import cn.zzdz.common.entity.result.ResultCode;
 import cn.zzdz.common.utils.IdWorker;
 import cn.zzdz.device.dao.GroupDeviceRelMapper;
+import cn.zzdz.device.service.DeviceInfoService;
 import cn.zzdz.device.service.GroupDeviceRelService;
+import cn.zzdz.device.service.GroupInfoService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +17,21 @@ import java.util.List;
 
 @Service
 public class GroupDeviceRelServiceImpl implements GroupDeviceRelService {
-
-    @Autowired
-    private IdWorker idWorker;
-
     @Autowired
     private GroupDeviceRelMapper groupDeviceRelMapper;
 
+    @Autowired
+    private GroupInfoService groupInfoService;
+
+    @Autowired
+    private DeviceInfoService deviceInfoService;
+
     @Override
     public int save(GroupDeviceRelKey groupDeviceRel) {
-        String deviceId = idWorker.nextId()+"";
-        String groupId = idWorker.nextId()+"";
-        Preconditions.checkArgument(deviceId.trim().length()>0, ResultCode.ID_ERROR.message());
-        Preconditions.checkArgument(groupId.trim().length()>0, ResultCode.ID_ERROR.message());
-
-        groupDeviceRel.setDeviceId(deviceId);
-        groupDeviceRel.setGroupId(groupId);
-
+        // 验证分组id是否有效
+        groupInfoService.validId(groupDeviceRel.getGroupId());
+        // 验证设备id是否有效
+        deviceInfoService.validId(groupDeviceRel.getDeviceId());
         // 保存
         return groupDeviceRelMapper.insert(groupDeviceRel);
     }
@@ -58,4 +59,5 @@ public class GroupDeviceRelServiceImpl implements GroupDeviceRelService {
         criteria.andGroupIdIn(groupIds);
         return groupDeviceRelMapper.selectByExample(example);
     }
+
 }

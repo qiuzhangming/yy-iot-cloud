@@ -11,6 +11,7 @@
         <module name="yy-iot-device" />
         <module name="yy-iot-security" />
         <module name="yy-iot-common" />
+        <module name="yy-iot-api" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

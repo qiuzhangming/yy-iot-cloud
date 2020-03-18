@@ -1,5 +1,5 @@
 package cn.zzdz.common.constData;
 
 public class ConstData {
-    public static final Integer ID_SIZE = 19;
+    public static final int ID_SIZE = 19;
 }

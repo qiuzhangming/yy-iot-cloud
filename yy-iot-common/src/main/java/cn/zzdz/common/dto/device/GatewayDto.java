@@ -25,18 +25,13 @@ public class GatewayDto {
 
     @ApiModelProperty(value = "网关的id")
     @Min(value = ID_SIZE, groups = UpdateMethod.class)
-    @NotNull(groups = UpdateMethod.class)
+    //@NotNull(groups = UpdateMethod.class)
     private String id;
 
     @ApiModelProperty(value = "公司id")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class})
     @NotNull(groups = {CreatMethod.class})
     private String companyId;
-
-    @ApiModelProperty(value = "分组id")
-    @Min(value = ID_SIZE, groups = {CreatMethod.class})
-    @NotNull(groups = {CreatMethod.class})
-    private String groupId;
 
     @ApiModelProperty(value = "上级设备id,没有上级设备可不填")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class})
@@ -50,14 +45,13 @@ public class GatewayDto {
     @Range(min = 0, max = 2, groups = {CreatMethod.class, UpdateMethod.class})
     private Short commType;
 
-
     @ApiModelProperty(value = "硬件版本 1:老版本的 2:机场版本")
-    @Range(min = 10, max = 100, groups = {CreatMethod.class, UpdateMethod.class})
+    @Range(min = 1, max = 100, groups = {CreatMethod.class, UpdateMethod.class})
     @NotNull(groups = {CreatMethod.class})
     private Short hardwareVersion;
 
     @ApiModelProperty(value = "软件版本 默认填1")
-    @Range(min = 10, max = 100, groups = {CreatMethod.class, UpdateMethod.class})
+    @Range(min = 1, max = 100, groups = {CreatMethod.class, UpdateMethod.class})
     private Short softwareVersion;
 
     @ApiModelProperty(value = "通讯卡的imei")
@@ -89,6 +83,10 @@ public class GatewayDto {
             groups = {CreatMethod.class, UpdateMethod.class}
     )
     private String lat;
+
+    @ApiModelProperty(value = "地址信息")
+    @Length(max = 50, groups = {CreatMethod.class, UpdateMethod.class})
+    private String address;
 
     @ApiModelProperty(value = "备注信息")
     @Length(max = 100, groups = {CreatMethod.class, UpdateMethod.class})

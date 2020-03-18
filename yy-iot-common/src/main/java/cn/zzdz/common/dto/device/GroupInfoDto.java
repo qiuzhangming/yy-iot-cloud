@@ -23,22 +23,22 @@ public class GroupInfoDto {
 
     @ApiModelProperty(value = "分组id")
     @Min(value = ID_SIZE, groups = UpdateMethod.class)
-    @NotNull(groups = UpdateMethod.class)
+    //@NotNull(groups = UpdateMethod.class)
     private String id;
 
     @ApiModelProperty(value = "公司id")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class, SearchMethord.class})
-    @NotNull(groups = {CreatMethod.class, UpdateMethod.class, SearchMethord.class})
+    @NotNull(groups = {CreatMethod.class, SearchMethord.class})
     private String companyId;
 
     @ApiModelProperty(value = "分组模式 1:控制柜分组，2:rtu分组，3:网关分组，4:灯杆分组,5:单灯分组")
     @Min(value = 1, groups = {CreatMethod.class, UpdateMethod.class, SearchMethord.class})
-    @NotNull(groups = {CreatMethod.class, UpdateMethod.class, SearchMethord.class})
+    @NotNull(groups = {CreatMethod.class, SearchMethord.class})
     private Short model;
 
     @ApiModelProperty(value = "分组类型 1:默认,用于树状图默认的加载 2:其他值:扩展类型,例如用户自定义的分组。")
     @Min(value = 1, groups = {CreatMethod.class, UpdateMethod.class, SearchMethord.class})
-    @NotNull(groups = {CreatMethod.class, UpdateMethod.class, SearchMethord.class})
+    @NotNull(groups = {CreatMethod.class, SearchMethord.class})
     private Short type;
 
     @ApiModelProperty(value = "分组名字")

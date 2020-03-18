@@ -14,6 +14,7 @@
         <module>yy-iot-common</module>
         <module>yy-iot-device</module>
         <module>yy-iot-generator</module>
+        <module>yy-iot-api</module>
     </modules>
 
 

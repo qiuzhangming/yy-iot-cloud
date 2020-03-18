@@ -4,11 +4,17 @@ import cn.zzdz.common.constData.DeviceModel;
 import cn.zzdz.common.dto.device.*;
 import cn.zzdz.common.entity.device.DeviceInfo;
 import cn.zzdz.common.entity.device.DeviceInfoExample;
+import cn.zzdz.common.entity.device.GroupDeviceRelExample;
+import cn.zzdz.common.entity.device.GroupDeviceRelKey;
 import cn.zzdz.common.entity.result.ResultCode;
 import cn.zzdz.common.utils.IdWorker;
 import cn.zzdz.device.dao.DeviceInfoMapper;
+import cn.zzdz.device.service.AddressService;
 import cn.zzdz.device.service.DeviceInfoService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static cn.zzdz.common.constData.DeviceModel.DEVICE_TYPE_DISTRIBUTIONBOX;
@@ -37,6 +44,9 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
 
     @Autowired
     private DeviceInfoMapper deviceInfoMapper;
+
+    @Autowired
+    private AddressService addressService;
 
     /**
      * 老版本未区分项目的deviceSn生成规则
@@ -141,6 +151,17 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
 
     @Override
     public int save(DeviceInfo deviceInfo) {
+        // 验证pid是否合法
+        String pid = deviceInfo.getPid();
+        if (Objects.nonNull(pid) && !pid.trim().isEmpty()) {
+            validId(pid);
+        }
+
+        // 根据经纬度获取地址信息
+        if (Strings.isNullOrEmpty(deviceInfo.getAddress())) {
+            Map<String, String> addressMap = addressService.getAddress(deviceInfo.getLat(), deviceInfo.getLng());
+            deviceInfo.setAddress(addressMap.get("address"));
+        }
 
         // 设置id,启用标志,创建时间
         String id = idWorker.nextId()+"";
@@ -172,10 +193,11 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
     }
 
     @Override
-    public List<DeviceInfo> findByCompanyId(String companyId) {
+    public List<DeviceInfo> findByCompanyIdAndDeviceType(String companyId, int deviceType) {
         DeviceInfoExample example = new DeviceInfoExample();
         DeviceInfoExample.Criteria criteria = example.createCriteria();
         criteria.andCompanyIdEqualTo(companyId);
+        criteria.andDeviceTypeEqualTo((short) deviceType);
         return deviceInfoMapper.selectByExample(example);
     }
 
@@ -185,6 +207,17 @@ public class DeviceInfoServiceImpl implements DeviceInfoService {
         DeviceInfoExample.Criteria criteria = example.createCriteria();
         criteria.andPidEqualTo(pid);
         return deviceInfoMapper.selectByExample(example);
+    }
+
+    @Override
+    public PageInfo<DeviceInfo> findByIds(List<String> ids, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        DeviceInfoExample example = new DeviceInfoExample();
+        DeviceInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andIdIn(ids);
+        List<DeviceInfo> deviceInfos = deviceInfoMapper.selectByExample(example);
+        PageInfo<DeviceInfo> pageInfo = new PageInfo<>(deviceInfos);
+        return pageInfo;
     }
 
     @Override

@@ -23,18 +23,13 @@ import static cn.zzdz.common.constData.ConstData.ID_SIZE;
 public class LightcontrollerDto {
     @ApiModelProperty(value = "单灯控制器的id")
     @Min(value = ID_SIZE, groups = UpdateMethod.class)
-    @NotNull(groups = UpdateMethod.class)
+    //@NotNull(groups = UpdateMethod.class)
     private String id;
 
     @ApiModelProperty(value = "公司id")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class})
     @NotNull(groups = {CreatMethod.class})
     private String companyId;
-
-    @ApiModelProperty(value = "分组id")
-    @Min(value = ID_SIZE, groups = {CreatMethod.class})
-    @NotNull(groups = {CreatMethod.class})
-    private String groupId;
 
     @ApiModelProperty(value = "上级设备id,没有上级设备可不填")
     @Min(value = ID_SIZE, groups = {CreatMethod.class, UpdateMethod.class})
@@ -54,7 +49,7 @@ public class LightcontrollerDto {
     private Short hardwareVersion;
 
     @ApiModelProperty(value = "软件版本,默认填1")
-    @Range(min = 10, max = 100, groups = {CreatMethod.class, UpdateMethod.class})
+    @Range(min = 1, max = 100, groups = {CreatMethod.class, UpdateMethod.class})
     private Short softwareVersion;
 
     @ApiModelProperty(value = "使用类型 1:主灯 2:副灯 3:灯带 4:机场高杆灯")

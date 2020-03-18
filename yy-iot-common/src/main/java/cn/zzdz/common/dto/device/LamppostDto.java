@@ -23,7 +23,7 @@ import static cn.zzdz.common.constData.ConstData.ID_SIZE;
 public class LamppostDto {
     @ApiModelProperty(value = "灯杆的id")
     @Min(value = ID_SIZE, groups = UpdateMethod.class)
-    @NotNull(groups = UpdateMethod.class)
+    //@NotNull(groups = UpdateMethod.class)
     private String id;
 
     @ApiModelProperty(value = "公司id")
