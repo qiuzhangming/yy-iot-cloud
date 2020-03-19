@@ -8,6 +8,7 @@ import cn.zzdz.common.entity.result.ResultCode;
 import cn.zzdz.common.validated.CreatMethod;
 import cn.zzdz.common.validated.UpdateMethod;
 import cn.zzdz.device.service.DeviceInfoService;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -77,6 +78,7 @@ public class DeviceController {
         return getResult(count);
     }
 
+
     @ApiOperation(value="根据id删除")
     @DeleteMapping("/{id}")
     public Result deleyeById(@Size(min = ID_SIZE) @PathVariable("id") String id) {
@@ -91,6 +93,7 @@ public class DeviceController {
         return getResult(count);
     }
 
+    @SentinelResource("findById")
     @ApiOperation(value="根据id查询")
     @GetMapping("/{id}")
     public Result findById(@Size(min = ID_SIZE) @PathVariable("id") String id) {
