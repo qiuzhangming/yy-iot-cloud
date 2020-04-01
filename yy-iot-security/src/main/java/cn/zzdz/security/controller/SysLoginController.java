@@ -89,7 +89,7 @@ public class SysLoginController {
 	 * 退出
 	 */
 	@ApiOperation(value="退出",notes="退出登录")
-	@GetMapping(value = "logout")
+	@GetMapping(value = "/sys/logout")
 	public String logout() {
 		SecurityUtils.getSubject().logout();
 //		return new Result(ResultCode.SUCCESS);

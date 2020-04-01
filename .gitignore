@@ -1,2 +1,6 @@
 # Project exclude paths
 /yy-iot-security/target/
+/yy-iot-generator/target/
+/yy-iot-device/target/
+/yy-iot-common/target/
+/yy-iot-api/target/

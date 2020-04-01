@@ -8,6 +8,7 @@ import cn.zzdz.common.entity.security.SysUser;
 import cn.zzdz.common.utils.IdWorker;
 import cn.zzdz.security.dao.SysRoleDao;
 import cn.zzdz.security.dao.SysUserDao;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
@@ -68,6 +69,7 @@ public class SysUserController extends BaseController {
     @RequiresPermissions(value = {"sys:user:list", "or"}, logical = Logical.OR)
     @GetMapping("/user")
     public Result findAll(Pageable pageable) {
+        //System.out.println(JSON.toJSONString(pageable));
         Page<SysUser> page = sysUserDao.findAllByCompanyId(companyId, pageable);
         return new Result(ResultCode.SUCCESS, page);
     }
@@ -109,6 +111,8 @@ public class SysUserController extends BaseController {
     public Result update(@PathVariable("id") String id, @RequestBody SysUser sysUser){
         SysUser entity = sysUserDao.findById(id).get();
 
+        entity.setEmail(sysUser.getEmail());
+        entity.setMobile(sysUser.getMobile());
         entity.setStatus(sysUser.getStatus());
         entity.setDepartmentId(sysUser.getDepartmentId());
         sysUserDao.save(entity);

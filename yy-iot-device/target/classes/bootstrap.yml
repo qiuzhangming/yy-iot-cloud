@@ -1,0 +1,37 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: iot-device-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 114.115.134.88:8848
+        group: DEVICE_GROUP
+        namespace: d12a73a0-fc3a-4037-813b-c7e52f841dc6
+        #ip: 125.71.147.167
+      config:
+        server-addr: 114.115.134.88:8848
+        file-extension: yaml
+        group: DEVICE_GROUP
+        namespace: d12a73a0-fc3a-4037-813b-c7e52f841dc6
+    sentinel:
+      transport:
+        #dashboard: 114.115.134.88:8080
+        #clientIp: 125.71.147.167
+        dashboard: localhost:8080
+        port: 8179
+      datasource:
+        ds1:
+          nacos:
+            server-addr: 114.115.134.88:8848
+            dataId: ${spring.application.name}-sentinel
+            groupId: DEVICE_GROUP
+            namespace: d12a73a0-fc3a-4037-813b-c7e52f841dc6
+            data-type: json
+            rule-type: flow
+
+feign:
+  sentinel:
+    enabled: true
