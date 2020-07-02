@@ -27,7 +27,7 @@
         <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.0.RELEASE</spring-cloud-alibaba.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <druid.version>1.1.21</druid.version>
         <mybatis.version>2.1.2</mybatis.version>
         <pagehelper.version>1.2.12</pagehelper.version>
